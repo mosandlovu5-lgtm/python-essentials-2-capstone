@@ -35,3 +35,6 @@ class HonoursStudent(Student):
         if self.score >= 75:
             return "Distinction (Honours)"
         return super().get_grade()
+
+    def __str__(self):
+        return f"{super().__str__()} | Research: {self.research_topic}"
