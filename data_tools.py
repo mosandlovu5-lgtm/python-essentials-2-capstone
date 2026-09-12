@@ -11,28 +11,30 @@ LOG_FILE = DATA_DIR / "activity.log"
 def ensure_data_dir():
     DATA_DIR.mkdir(exist_ok=True)
 
+# Generate_data_file
+def load_students():
+    if not STUDENTS_FILE.exists():
+        raise FileNotFoundError(
+            "No data file yet. Choose option 1 first."
+        )
 
-def generate_data_file():
-    ensure_data_dir()
+    clean_records = []
 
-    raw_names = [
-        "  lebo molefe  ",
-        "AISHA khan",
-        "  thabo NKOSI",
-        "zanele dlamini  ",
-        "michael  smith",
-        "  priya naidoo",
-        "SIPHO  MASEKO",
-        "nina williams",
-        "  karabo tsotlhe",
-        "JAMES brown",
-    ]
+    with STUDENTS_FILE.open("r", encoding="utf-8") as file:
+        for line in file:
+            parts = line.strip().split(",")
 
-    random.shuffle(raw_names)
+            if len(parts) != 2:
+                continue
 
-    with STUDENTS_FILE.open("w", encoding="utf-8") as file:
-        for name in raw_names:
-            score = random.randint(35, 98)
-            file.write(f" {name} , {score} \n")
+            try:
+                name = " ".join(parts[0].strip().lower().title().split())
+                score = int(parts[1].strip())
 
-    return STUDENTS_FILE
+                if name and 0 <= score <= 100:
+                    clean_records.append((name, score))
+
+            except ValueError:
+                continue
+
+    return clean_records   
