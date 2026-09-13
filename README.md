@@ -4,7 +4,8 @@ A terminal-based Python application that generates messy student data, cleans an
 
 ## Author
 
-**Name:** [Mosa Ndlovu]  
+**Name:** Mosa Ndlovu
+
 **Cohort:** 2026 DS Jan Cohort
 
 ## Features
